@@ -1,0 +1,48 @@
+.nav-item-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    position: absolute;
+    visibility: inherit;
+    justify-content: center;
+    padding: 1.5rem;
+    
+    .nav-links{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 30%;
+        padding: 0 1rem;
+    }
+    ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .nav-link{
+        text-decoration: none;
+        list-style-type: none;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.5;
+        }
+        transition: 0.2s ease;
+        text-transform: capitalize;
+        font-family: "DM Sans", sans-serif;
+        letter-spacing: 0.5px;
+        font-size: 0.9rem;
+    }
+    #logo{
+        width: 10%;
+    }
+}

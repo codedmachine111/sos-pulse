@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { Home } from "./sections/Home/Home";
+import { Footer } from "./components/Footer/Footer";
+import { useState, createContext, useEffect } from "react";
+
+export const AppContext = createContext();
 
 function App() {
+  const [location, setLocation] = useState({ lat: 0, lon: 0 });
+
+  const options = {
+    timeout: 60000,
+  };
+  const error = (err) => {
+    alert(`ERROR(${err.code}): ${err.message}`);
+  };
+
+  // GET USER LOCATION
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        setLocation({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      },
+      error,
+      options
+    );
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{ location }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AppContext.Provider>
   );
 }
 
